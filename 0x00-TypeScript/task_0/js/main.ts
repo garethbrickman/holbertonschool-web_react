@@ -9,14 +9,14 @@ interface Student {
 
 /* Setup student objects */
 
-const student1 = {
+const student1: Student = {
     firstName: 'Frodo',
     lastName: 'Baggins',
     age: 23,
     location: 'The Shire'
 }
 
-const student2 = {
+const student2: Student = {
     firstName: 'Bilbo',
     lastName: 'Baggins',
     age: 44,
