@@ -1,5 +1,7 @@
 /* Setup interface */
 
+/* Task 1 */
+
 interface Teacher {
     readonly firstName: string;
     readonly lastName: string;
@@ -9,9 +11,13 @@ interface Teacher {
     [propName: string]: any;
 }
 
+/* Task 2 */
+
 interface Directors extends Teacher {
   numberOfReports: number;
 }
+
+/* Task 3 */
 
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
@@ -23,6 +29,8 @@ const printTeacher: printTeacherFunction = (
 ): string => {
   return `${firstName[0]}. ${lastName}`;
 };
+
+/* Task 4 */
 
 interface StudentClass {
   firstName: string;
