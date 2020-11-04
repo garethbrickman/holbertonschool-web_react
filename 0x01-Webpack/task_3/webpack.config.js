@@ -1,24 +1,42 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
-  entry: './js/dashboard_main.js',
+  entry: {
+    all: ["./modules/header/header.js", "./modules/body/body.js", "./modules/footer/footer.js"],
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: "./public",
+    port: 8564
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Output Management',
+    }),
+  ],
+  mode: "development",
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    path:path.resolve(__dirname, "public"),
+    filename: "[name].bundle.js"
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       },
       {
-        test: /\.jpg$/,
-        use: {
-          loader: 'file-loader'
-        }
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ]
       }
     ]
   }
-};
+}
