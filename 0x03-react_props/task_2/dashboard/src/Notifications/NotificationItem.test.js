@@ -13,7 +13,7 @@ describe('NotificationItem', () => {
     const li = wrapper.find('li');
 
     expect(li.props()).to.have.property('data-notification-type', 'default');
-    expect(li.text()).to.equal;('test');
+    expect(li.text()).to.equal('test');
   });
 
   test('renders with correct inner html', () => {
