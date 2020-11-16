@@ -17,11 +17,8 @@ describe('NotificationItem', () => {
   });
 
   test('renders with correct inner html', () => {
-    const wrapper = shallow(
-      <NotificationItem type='urgent' html={{__html: '<u>test</u>'}} />
-    );
-    const li = wrapper.find('li');
-
-    expect(li.props()).to.have.property('dangerouslySetInnerHTML', {__html: '<u>test</u>'});
+    const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }} />);
+    
+    expect(wrapper.html()).to.equal('<li><u>test</u></li>');
   });
 });
