@@ -9,32 +9,26 @@ import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
   componentDidMount() {
-    const { logOut } = this.props;
-    const keyMap = {};
-
-    window.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Control' || ev.key === 'h') {
-        keyMap[ev.key] = ev.key;
-
-        if (keyMap['Control'] && keyMap['h']) {
-          delete keyMap['Control'];
-          delete keyMap['h'];
-          window.alert('Logging you out');
-          logOut();
-        }
-      }
-    });
-
-    window.addEventListener('keyup', (ev) => {
-      if (ev.key === 'Control' || ev.key === 'h') delete keyMap[ev.key];
-    });
+      window.addEventListener("keydown", this.handleLogout);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown');
-    window.removeEventListener('keyup');
+      window.removeEventListener("keydown", this.handleLogout);
   }
+
+  handleLogout (event) {
+      if (event.ctrlKey && event.key === 'h') {
+          event.preventDefault();
+          alert("Logging you out");
+          this.props.logOut();
+      }
+    }
 
   render() {
     const { isLoggedIn } = this.props;

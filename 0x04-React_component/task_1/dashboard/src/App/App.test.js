@@ -57,25 +57,14 @@ describe('App', () => {
     expect(login).to.have.lengthOf(0);
     expect(courseList).to.have.lengthOf(1);
   });
-  // TODO: implement below test with chai-spies if possible
+  test('logOut alerts with correct string', () => {
+    const myLogOut = jest.fn(() => undefined);
+    const myAlert = jest.spyOn(global, 'alert');
 
-/*   test('logout keyboard shortcut works', () => {
-    const map = {};
-    window.addEventListener = jest.fn((ev, cb) => {
-      map[ev] = cb;
-    });
+    const wrapper = shallow(<App logOut={myLogOut} />)
 
-    window.alert = jest.fn();
-
-    const testProps = {
-      logOut: jest.fn()
-    };
-    const wrapper = shallow(<App {...testProps} />);
-
-    map.keydown({ key: 'Control' });
-    map.keydown({ key: 'h' });
-
-    expect(testProps.logOut).to.have.been.called();
-    expect(window.alert).to.have.been.called.with('Logging you out');
-  }); */
+    expect(myAlert);
+    expect(myLogOut);
+    jest.restoreAllMocks();
+  });
 });
