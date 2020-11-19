@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   'menu-item': {
     marginBottom: 0,
     '@media (max-width: 900px)': {
-      display: 'none'
+/*       display: 'none' */
     }
   },
   wrapper: {
