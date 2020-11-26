@@ -14,7 +14,19 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.state = {displayDrawer: true};
   }
+
+  handleDisplayDrawer() {
+    this.setState({displayDrawer: true});
+}
+
+handleHideDrawer() {
+    this.setState({displayDrawer: false});
+}
+
 
   componentDidMount() {
       window.addEventListener("keydown", this.handleLogout);
@@ -53,7 +65,12 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Notifications listNotifications={listNotifications} />
+        <Notifications 
+        listNotifications={listNotifications}
+        displayDrawer={this.state.displayDrawer}
+        handleDisplayDrawer={this.handleDisplayDrawer}
+        handleHideDrawer={this.handleHideDrawer} 
+        />
         <div className={css(styles['sans-serif'])}>
           <Header />
             <div className={css(styles.padding)}>
@@ -97,7 +114,12 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif'
   },
   padding: {
-    padding: '4rem'
+    '@media (min-width: 901px)': {
+      padding: '4rem'
+    },
+    '@media (max-width: 900px)': {
+      padding: '2rem 2rem 50px 2rem'
+    }
   }
 });
 

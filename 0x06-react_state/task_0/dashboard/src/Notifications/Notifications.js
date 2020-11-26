@@ -22,14 +22,30 @@ class Notification extends Component {
     const currentNotifs = this.props.listNotifications;
     const newNotifs = nextProps.listNotifications;
 
-    return newNotifs.length > currentNotifs.length;
+    const currentDrawer = this.props.displayDrawer;
+    const newDrawer = nextProps.displayDrawer;
+
+    return (
+      newNotifs.length > currentNotifs.length || newDrawer !== currentDrawer
+    );
   }
   
   render() {
-    const { displayDrawer, listNotifications } = this.props;
+    const { 
+      listNotifications,
+      displayDrawer,
+      handleDisplayDrawer,
+      handleHideDrawer 
+    } = this.props;
     return (
-      <div className={css(styles.wrapper)}>
-        <div className={css(styles.div, styles['menu-item'])}  data-testid='menu-item'>Your Notifications</div>
+      <div className={css(styles.wrapper)} data-testid='wrapper'>
+        <div 
+        className={css(styles.div, styles['menu-item'])}
+        data-testid='menu-item'
+        onClick={handleDisplayDrawer}
+        >
+          Your Notifications
+          </div>
         {displayDrawer && (
           <div className={css(styles.div, styles.notifs)} data-testid='notifs'>
           {listNotifications.length ? (
@@ -53,7 +69,7 @@ class Notification extends Component {
             <button
               className={css(styles.button)}
               aria-label='Close'
-              onClick={() => console.log('Close button has been clicked')}
+              onClick={handleHideDrawer}
             >
               <img
                 src={closeIcon}
@@ -70,12 +86,16 @@ class Notification extends Component {
 
 Notification.propTypes = {
   displayDrawer: PropTypes.bool,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape)
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func
 };
 
 Notification.defaultProps = {
   displayDrawer: false,
-  listNotifications: []
+  listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {}
 };
 
 const opacityKeyframes = {
