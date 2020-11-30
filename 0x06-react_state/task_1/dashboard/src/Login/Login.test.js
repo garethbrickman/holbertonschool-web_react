@@ -26,7 +26,7 @@ describe('Login', () => {
     const inputs = wrapper.find('input');
     const labels = wrapper.find('label');
 
-    expect(inputs).to.have.lengthOf(2);
+    expect(inputs).to.have.lengthOf(3);
     expect(labels).to.have.lengthOf(2);;
   });
 });
