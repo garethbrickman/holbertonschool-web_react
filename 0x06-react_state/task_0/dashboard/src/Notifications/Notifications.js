@@ -70,6 +70,7 @@ class Notification extends Component {
               className={css(styles.button)}
               aria-label='Close'
               onClick={handleHideDrawer}
+              data-testid='close-notifs'
             >
               <img
                 src={closeIcon}
