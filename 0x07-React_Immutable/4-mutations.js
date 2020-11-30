@@ -13,6 +13,6 @@ export const map = Map({
 
 /* console.log(Object.fromEntries([...map])); */
 
-export const map2 = setIn(setIn(map, ['3'], 'Benjamin'), ['5'], 'Oliver');
+export const map2 = setIn(setIn(map, ['2'], 'Benjamin'), ['4'], 'Oliver');
 
 /* console.log(Object.fromEntries([...map2])); */
