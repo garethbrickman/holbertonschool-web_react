@@ -2,7 +2,7 @@ import immutable from 'immutable';
 
 const { Map, setIn } = immutable;
 
-export const map = Map( {
+export const map = Map({
     1: 'Liam',
     2: 'Noah',
     3: 'Elijah',
@@ -11,4 +11,8 @@ export const map = Map( {
     6: 'Lucas',
 });
 
-export const map2 = setIn(setIn(map, ['2'], 'Benjamin'), ['4'], 'Oliver');
+/* console.log(Object.fromEntries([...map])); */
+
+export const map2 = setIn(setIn(map, ['3'], 'Benjamin'), ['5'], 'Oliver');
+
+/* console.log(Object.fromEntries([...map2])); */
