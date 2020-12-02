@@ -7,5 +7,5 @@ export function concatElements(page1, page2) {
 }
 
 export function mergeElements(page1, page2) {
-  return Map(page1).merge(Map(map2));
+  return Map(page1).merge(Map(page2));
 }
