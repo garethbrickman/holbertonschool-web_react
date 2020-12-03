@@ -1,5 +1,5 @@
 import React from 'react';
-import { expect } from 'chai';
+import { expect as expect2 } from 'chai';
 import { shallow } from 'enzyme';
 import { StyleSheetTestUtils } from 'aphrodite';
 
@@ -16,14 +16,14 @@ describe('NotificationItem', () => {
   
   test('renders without crashing', () => {
     const wrapper = shallow(<NotificationItem />);
-    expect(wrapper.exists());
+    expect2(wrapper.exists());
   });
   test('renders with correct type and value', () => {
     const wrapper = shallow(<NotificationItem type='default' value='test' />);
     const li = wrapper.find('li');
 
-    expect(li.props()).to.have.property('data-notification-type', 'default');
-    expect(li.text()).to.equal('test');
+    expect2(li.props()).to.have.property('data-notification-type', 'default');
+    expect2(li.text()).to.equal('test');
   });
 
   test('renders with correct inner html', () => {
@@ -32,7 +32,7 @@ describe('NotificationItem', () => {
     );
     const li = wrapper.find('li');
     
-    expect(li.props()).to.have.property('dangerouslySetInnerHTML', {
+    expect(li.props()).toHaveProperty('dangerouslySetInnerHTML', {
       __html: '<u>test</u>'
     });
   });
