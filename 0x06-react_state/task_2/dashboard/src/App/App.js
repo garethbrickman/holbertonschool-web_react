@@ -10,7 +10,7 @@ import CourseList from '../CourseList/CourseList';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
-import AppContext from './AppContext';
+import AppContext, { user }  from './AppContext';
 
 class App extends Component {
   constructor(props) {
