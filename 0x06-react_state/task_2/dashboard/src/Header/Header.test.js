@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
+import { mount } from 'enzyme';
+import { expect as expect2 } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
 
 import Header from './Header';
@@ -15,18 +15,36 @@ describe('Header', () => {
   });
 
   test('renders without crashing', () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = mount(<Header />, {
+      context: {
+        user: {
+          email: '',
+          password: '',
+          isLoggedIn: false
+        },
+        logOut: () => {}
+      }
+    });
 
-    expect(wrapper.exists());
+    expect2(wrapper.exists());
   });
 
   test('renders an image and h1', () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = mount(<Header />, {
+      context: {
+        user: {
+          email: '',
+          password: '',
+          isLoggedIn: false
+        },
+        logOut: () => {}
+      }
+    });
 
     const image = wrapper.find('img');
     const h1 = wrapper.find('h1');
 
-    expect(image.exists());
-    expect(h1.exists());
+    expect2(image.exists());
+    expect2(h1.exists());
   });
 });
