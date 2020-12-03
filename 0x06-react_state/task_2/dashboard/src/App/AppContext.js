@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export const defaultUser = {
+export const user = {
   email: '',
   password: '',
   isLoggedIn: false
@@ -8,6 +8,6 @@ export const defaultUser = {
 
 export const logOut = () => {};
 
-const appContext = createContext({ defaultUser, logOut });
+const appContext = createContext({ user, logOut });
 
 export default appContext;
