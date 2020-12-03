@@ -7,7 +7,6 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: props.isLoggedIn,
       email: '',
       password: '',
       enableSubmit: false
@@ -19,7 +18,9 @@ class Login extends Component {
   }
 
   handleLoginSubmit(event) {
-    this.setState({ ...this.state, isLoggedIn: true });
+    const { email, password } = this.state;
+
+    this.props.logIn(email, password);
 
     event.preventDefault();
   }
@@ -34,12 +35,13 @@ class Login extends Component {
   }
 
   handleChangePassword(event) {
-    this.setState({ ...this.state, password: event.target.value });
+    this.setState({ ...this.state, password: event.target.value }, () => {
 
     const { email, password } = this.state;
 
     if (email !== '' && password !== '')
       this.setState({ ...this.state, enableSubmit: true });
+    });
   }
 
   render() {
@@ -126,11 +128,11 @@ const styles = StyleSheet.create({
 });
 
 Login.propTypes = {
-  isLoggedIn: PropTypes.bool
+  logIn: PropTypes.func
 };
 
 Login.defaultProps = {
-  isLoggedIn: false
+  logIn: () => {}
 };
 
 export default Login;
