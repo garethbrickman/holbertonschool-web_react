@@ -14,23 +14,6 @@ describe('WithLogging', () => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  test('console.log called on mount', () => {
-    console.log = jest.fn();
-
-    const TestWithLogging = WithLogging(() => <p />);
-    const wrapper = mount(<TestWithLogging />);
-
-    expect(console.log).toHaveBeenCalledWith(`Component Component is mounted`);
-
-    wrapper.unmount();
-
-    expect(console.log).toHaveBeenCalledWith(
-      `Component Component is going to unmount`
-    );
-
-    expect(console.log).toHaveBeenCalledTimes(2);
-  });
-
   test('correctly logs component name', () => {
     console.log = jest.fn();
 
