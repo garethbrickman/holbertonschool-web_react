@@ -7,7 +7,7 @@ import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
-class Notification extends PureComponent {
+class Notifications extends PureComponent {
   render() {
     const { 
       listNotifications,
@@ -25,14 +25,14 @@ class Notification extends PureComponent {
         onClick={handleDisplayDrawer}
         >
           Your Notifications
-          </div>
+        </div>
         {displayDrawer && (
           <div className={css(styles.div, styles.notifs)} data-testid='notifs'>
           {listNotifications.length ? (
             <Fragment>
               <p>Here is the list of notifications</p>
               <ul className={css(styles.list)}>
-                {listNotifications.map(({ id, type, value, html }) => (
+                {listNotifications.map(({ id, type, value, html, markNotificationAsRead }) => (
                   <NotificationItem
                     key={id}
                     type={type}
@@ -65,7 +65,7 @@ class Notification extends PureComponent {
   }
 }
 
-Notification.propTypes = {
+Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   handleDisplayDrawer: PropTypes.func,
@@ -73,12 +73,12 @@ Notification.propTypes = {
   markNotificationAsRead: PropTypes.func
 };
 
-Notification.defaultProps = {
+Notifications.defaultProps = {
   displayDrawer: false,
   listNotifications: [],
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
-  markNotificationAsRead: () => {}
+  markNotificationAsRead: () => {},
 };
 
 const opacityKeyframes = {
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Notification;
+export default Notifications;
