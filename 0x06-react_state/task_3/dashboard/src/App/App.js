@@ -19,7 +19,6 @@ class App extends Component {
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
-    this.logOut = this.logOut.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
 
     this.state = {
@@ -68,7 +67,7 @@ class App extends Component {
     const { listNotifications } = this.state;
     this.setState({...this.state, listNotifications: listNotifications.filter((notif) => notif.id !== id)
     });
-}
+  }
 
   componentDidMount() {
       window.addEventListener("keydown", this.handleLogout);
