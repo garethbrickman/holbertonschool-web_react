@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
-  const style = { 'background-color': isHeader ? '#deb5b54' : '#f5f5f5ab' };
+  const style = { backgroundColor: isHeader ? '#deb5b545' : '#f5f5f5ab' };
   const [checked, setChecked] = useState(false);
   const checkOnChange = ({ target }) => {
     setChecked(target.checked);
