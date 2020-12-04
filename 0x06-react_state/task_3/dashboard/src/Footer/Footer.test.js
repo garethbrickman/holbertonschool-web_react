@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 
 import Footer from './Footer';
+import AppContext from '../App/AppContext';
 
 describe('Footer', () => {
   test('renders without crashing', () => {
@@ -18,5 +19,24 @@ describe('Footer', () => {
     const re = /Copyright/;
 
     expect(re.test(wrapper.text()));
+  });
+
+  test('contact link NOT shown without user logged in', () => {
+    const wrapper = shallow(<Footer />);
+    const contact = wrapper.find('[data-testid="contact"]');
+
+    expect(contact).to.have.lengthOf(0);
+  });
+
+  test('contact link shown if user logged in', () => {
+    const wrapper = mount(
+      <AppContext.Provider value={{ user: { isLoggedIn: true } }}>
+        <Footer />
+      </AppContext.Provider>
+    );
+
+    const contact = wrapper.find('[data-testid="contact"]');
+
+    expect(contact).to.have.lengthOf(1);
   });
 });
