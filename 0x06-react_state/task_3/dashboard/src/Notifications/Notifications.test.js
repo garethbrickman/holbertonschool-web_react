@@ -1,6 +1,6 @@
 import React from 'react';
 import { expect as expect2 } from 'chai';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import { StyleSheetTestUtils } from 'aphrodite';
 
 import Notifications from './Notifications'
@@ -74,17 +74,33 @@ describe('Notifications', () => {
     });
   });
 
-  describe('listNotifications is not empty', () => {
-    test('renders a list with two items when passed two items', () => {
+  describe('listNotifications is NOT empty', () => {
       const nots = [
-        {id: 1, type: "default", value: "x"},
-        {id: 2, type: "default", value: "y"}
+        {id: 1, type: "default", value: "default notification"},
+        {id: 2, type: "urgent", value: "urgent notification", html: { __html: '<strong>complete by EOD</strong>' }}
       ];
       const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={nots} />);
-      expect2(wrapper.find("ul")).to.have.lengthOf(1);
-      expect2(wrapper.find(NotificationItem)).to.have.lengthOf(2);
+      const notifs = wrapper.find(NotificationItem);
+
+      test('number of notifications correct', () => {
+        expect2(notifs).to.have.lengthOf(2);
+      });
+
+      test('right attributes for notifications', () => {
+        const notif0 = notifs.at(0);
+        const notif1 = notifs.at(1);
+  
+        expect(notif0.props()).toHaveProperty('type', 'default');
+        expect(notif0.props()).toHaveProperty('value', 'default notification');
+        expect(notif0.props()).toHaveProperty('html', undefined);
+  
+        expect(notif1.props()).toHaveProperty('type', 'urgent');
+        expect(notif1.props()).toHaveProperty('value', 'urgent notification');
+        expect(notif1.props()).toHaveProperty('html', {
+          __html: '<strong>complete by EOD</strong>'
+        });
+      });
     });
-  });
 
   describe('message displays properly', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} />);
@@ -93,6 +109,39 @@ describe('Notifications', () => {
     expect2(noNewNotifs).to.have.lengthOf(1);
     expect2(noNewNotifs.text()).to.equal('No new notifications for now');
   });
+
+  test('updates only if there are new notifs', () => {
+    const initialNotifs = [
+      { id: 0, type: 'default', value: 'test 0' },
+      { id: 1, type: 'default', value: 'test 1' }
+    ];
+    const wrapper = shallow(
+      <Notifications displayDrawer={true} listNotifications={initialNotifs} />
+    );
+
+    const render = jest.spyOn(Notifications.prototype, 'render');
+
+    expect(render).toHaveBeenCalledTimes(0);
+
+     // listNotifications is longer
+     const longerNotifs = initialNotifs.slice();
+     longerNotifs.push({ id: 2, type: 'default', value: 'test 2' });
+ 
+     wrapper.setProps({ listNotifications: longerNotifs });
+     expect(render).toHaveBeenCalledTimes(1);
+ 
+     // listNotifications stays same
+     wrapper.setProps({ listNotifications: longerNotifs });
+     expect(render).toHaveBeenCalledTimes(1);
+ 
+     // listNotifications is shorter
+     const shorterNotifs = longerNotifs.slice();
+     shorterNotifs.pop();
+ 
+     wrapper.setProps({ listNotifications: shorterNotifs });
+     expect(render).toHaveBeenCalledTimes(2);
+   });
+
   test('clicking menu item calls handleDisplayDrawer', () => {
     const handleDisplayDrawer = jest.fn();
 
