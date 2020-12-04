@@ -1,42 +1,22 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
-import { getLatestNotification } from '../utils/utils';
 import closeIcon from '../assets/close-icon.png';
 
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
-class Notification extends Component {
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const currentNotifs = this.props.listNotifications;
-    const newNotifs = nextProps.listNotifications;
-
-    const currentDrawer = this.props.displayDrawer;
-    const newDrawer = nextProps.displayDrawer;
-
-    return (
-      newNotifs.length > currentNotifs.length || newDrawer !== currentDrawer
-    );
-  }
-  
+class Notification extends PureComponent {
   render() {
     const { 
       listNotifications,
       displayDrawer,
       handleDisplayDrawer,
-      handleHideDrawer 
+      handleHideDrawer,
+      markNotificationAsRead
     } = this.props;
+
     return (
       <div className={css(styles.wrapper)} data-testid='wrapper'>
         <div 
@@ -58,7 +38,7 @@ class Notification extends Component {
                     type={type}
                     value={value}
                     html={html}
-                    markAsRead={this.markAsRead}
+                    markAsRead={markNotificationAsRead}
                   />
                 ))}
               </ul>
@@ -89,14 +69,16 @@ Notification.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   handleDisplayDrawer: PropTypes.func,
-  handleHideDrawer: PropTypes.func
+  handleHideDrawer: PropTypes.func,
+  markNotificationAsRead: PropTypes.func
 };
 
 Notification.defaultProps = {
   displayDrawer: false,
   listNotifications: [],
   handleDisplayDrawer: () => {},
-  handleHideDrawer: () => {}
+  handleHideDrawer: () => {},
+  markNotificationAsRead: () => {}
 };
 
 const opacityKeyframes = {
