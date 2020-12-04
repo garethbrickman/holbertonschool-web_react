@@ -20,6 +20,7 @@ class App extends Component {
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
 
     this.state = {
       displayDrawer: false,
@@ -28,7 +29,20 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: () => this.logOut(),
+      logOut: () => this.setState({...this.state,
+        user: { email: '', password: '', isLoggedIn: false }
+      }),
+      listNotifications: [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        {
+          id: 3,
+          type: 'urgent',
+          html: {
+            __html: '<strong>Urgent requirement</strong> - complete by EOD'
+          }
+        }
+      ]
     };
   }
 
@@ -50,15 +64,11 @@ class App extends Component {
     });
   }
 
-  logOut() {
-    this.setState({
-      user: {
-        email: '',
-        password: '',
-        isLoggedIn: false,
-      },
+  markNotificationAsRead (id) {
+    const { listNotifications } = this.state;
+    this.setState({...this.state, listNotifications: listNotifications.filter((notif) => notif.id !== id)
     });
-  }
+}
 
   componentDidMount() {
       window.addEventListener("keydown", this.handleLogout);
@@ -78,22 +88,12 @@ class App extends Component {
 
   render() {
     const { isLoggedIn } = this.state.user;
-    const {user, logOut} = this.state;
+    const {user, logOut, listNotifications } = this.state;
 
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
       { id: 2, name: 'Webpack', credit: 20 },
       { id: 3, name: 'React', credit: 40 }
-    ];
-
-    const listNotifications = [
-      { id: 1, type: 'default', value: 'New course available' },
-      { id: 2, type: 'urgent', value: 'New resume available' },
-      {
-        id: 3,
-        type: 'urgent',
-        html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }
-      }
     ];
 
     return (
