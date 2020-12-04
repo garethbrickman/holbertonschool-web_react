@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../Header/Header';
@@ -65,7 +64,7 @@ class App extends Component {
 
   markNotificationAsRead (id) {
     const { listNotifications } = this.state;
-    this.setState({...this.state, listNotifications: listNotifications.filter((notif) => notif.id !== id)
+    this.setState({...this.state, listNotifications: listNotifications.filter(notif => notif.id !== id)
     });
   }
 
@@ -102,7 +101,8 @@ class App extends Component {
         listNotifications={listNotifications}
         displayDrawer={this.state.displayDrawer}
         handleDisplayDrawer={this.handleDisplayDrawer}
-        handleHideDrawer={this.handleHideDrawer} 
+        handleHideDrawer={this.handleHideDrawer}
+        markNotificationAsRead={this.markNotificationAsRead} 
         />
         <div className={css(styles['sans-serif'])}>
           <Header />
