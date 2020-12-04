@@ -32,9 +32,10 @@ class Notifications extends PureComponent {
             <Fragment>
               <p>Here is the list of notifications</p>
               <ul className={css(styles.list)}>
-                {listNotifications.map(({ id, type, value, html, markNotificationAsRead }) => (
+                {listNotifications.map(({ id, type, value, html }) => (
                   <NotificationItem
                     key={id}
+                    id={id}
                     type={type}
                     value={value}
                     html={html}
