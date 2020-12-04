@@ -141,4 +141,21 @@ describe('App', () => {
       expect(wrapper.state().user).to.have.property('isLoggedIn', false);
     });
   });
+
+  test('markNotificationAsRead functionality', () => {
+    const testNotifs = [
+      { id: 1, type: 'default', value: 'default notification' },
+      { id: 2, type: 'urgent', value: 'urgent notification' }
+    ];
+
+    const wrapper = shallow(<App />);
+    wrapper.setState({ ...wrapper.state(), listNotifications: testNotifs });
+
+    expect(wrapper.state().listNotifications).to.have.lengthOf(2);
+
+    wrapper.instance().markNotificationAsRead(1);
+
+    expect(wrapper.state().listNotifications).to.have.lengthOf(1);
+    expect(wrapper.state().listNotifications[0]).to.have.property('id', 2);
+  });
 });
