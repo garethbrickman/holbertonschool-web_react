@@ -2,12 +2,18 @@
 import React from 'react';
 import './Footer.css';
 import { getFullYear, getFooterCopy } from '../utils/utils';
+import AppContext from '../App/AppContext';
 
 const Footer = () => {
   return (
-      <div className='App-footer'>
-      <p>{`Copyright ${getFullYear()} - ${getFooterCopy(true)}`}</p>
+    <AppContext.Consumer>
+      {(value) => (
+        <div className='App-footer'>
+        {value.user.isLoggedIn && <a href='#' data-testid='contact'>Contact us</a>}
+        <p>{`Copyright ${getFullYear()} - ${getFooterCopy(true)}`}</p>
       </div>
+  )}
+  </AppContext.Consumer>
   );
 };
 
