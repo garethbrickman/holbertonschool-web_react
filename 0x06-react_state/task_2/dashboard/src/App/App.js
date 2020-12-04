@@ -28,17 +28,19 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: () => this.logOut(),
+      logOut: () => this.setState({...this.state,
+        user: { email: '', password: '', isLoggedIn: false }
+      })
     };
   }
 
   handleDisplayDrawer() {
     this.setState({displayDrawer: true});
-}
+  }
 
   handleHideDrawer() {
     this.setState({displayDrawer: false});
-}
+  }
 
   logIn(email, password) {
     this.setState({
@@ -73,8 +75,8 @@ class App extends Component {
           event.preventDefault();
           alert("Logging you out");
           this.props.logOut();
-      }
     }
+  }
 
   render() {
     const { isLoggedIn } = this.state.user;
