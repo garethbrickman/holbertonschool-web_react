@@ -77,7 +77,7 @@ describe('Notifications', () => {
   describe('listNotifications is NOT empty', () => {
       const nots = [
         {id: 1, type: "default", value: "default notification"},
-        {id: 2, type: "urgent", value: "urgent notification", html: { __html: '<strong>complete by EOD</strong>' }}
+        {id: 2, type: "urgent", html: { __html: '<strong>Urgent requirement - complete by EOD</strong>' }}
       ];
       const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={nots} />);
       const notifs = wrapper.find(NotificationItem);
@@ -95,9 +95,9 @@ describe('Notifications', () => {
         expect(notif0.props()).toHaveProperty('html', undefined);
   
         expect(notif1.props()).toHaveProperty('type', 'urgent');
-        expect(notif1.props()).toHaveProperty('value', 'urgent notification');
+        expect(notif1.props()).toHaveProperty('value', '');
         expect(notif1.props()).toHaveProperty('html', {
-          __html: '<strong>complete by EOD</strong>'
+          __html: '<strong>Urgent requirement - complete by EOD</strong>'
         });
       });
     });
