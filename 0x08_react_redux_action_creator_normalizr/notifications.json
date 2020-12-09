@@ -27,7 +27,7 @@
         "last": "Grimes"
       },
       "email": "norton.grimes@holberton.nz",
-      "picture: "http://placehold.it/32x32",
+      "picture": "http://placehold.it/32x32",
       "age": 37
     },
     "context": {
@@ -265,4 +265,4 @@
       "value": "Leo vel fringilla est ullamcorper. Volutpat consequat mauris nunc congue"
     }
   }
-]"
+]
