@@ -13,9 +13,12 @@
   "dependencies": {
     "aphrodite": "^2.4.0",
     "chai": "^4.2.0",
+    "node-fetch": "^2.6.1",
     "normalizr": "^3.6.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
