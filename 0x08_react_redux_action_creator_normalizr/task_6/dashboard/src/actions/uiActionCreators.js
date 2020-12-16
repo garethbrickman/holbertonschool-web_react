@@ -1,17 +1,22 @@
 import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from './uiActionTypes';
 
-export const login = (email, password) => ({
+export const login = (email, password) => 
+dispatch({
     type: LOGIN,
     user: { email, password }
   });
 
-  export const logout = () => ({ 
-    type: LOGOUT });
+  export const logout = () => 
+  dispatch({ 
+    type: LOGOUT 
+  });
 
-  export const displayNotificationDrawer = () => ({
+  export const displayNotificationDrawer = () => 
+  dispatch({
     type: DISPLAY_NOTIFICATION_DRAWER
   });
 
-  export const hideNotificationDrawer = () => ({
+  export const hideNotificationDrawer = () => 
+  dispatch({
     type: HIDE_NOTIFICATION_DRAWER
   });
