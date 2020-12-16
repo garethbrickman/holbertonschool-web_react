@@ -1,3 +1,4 @@
+
 [
   {
     "id": "5debd76480edafc8af244228",
@@ -27,7 +28,7 @@
         "last": "Grimes"
       },
       "email": "norton.grimes@holberton.nz",
-      "picture": "http://placehold.it/32x32",
+      "pictur": "http://placehold.it/32x32",
       "age": 37
     },
     "context": {
